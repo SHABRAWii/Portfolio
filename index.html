@@ -749,7 +749,10 @@
         const urlParams = new URLSearchParams(window.location.search);
         const projectUrl = urlParams.get('project');
         if (projectUrl) {
-            const decodedProjectUrl = decodeURIComponent(projectUrl);
+            var decodedProjectUrl = decodeURIComponent(projectUrl);
+            if (decodedProjectUrl.startsWith('/Portfolio')) {
+                decodedProjectUrl = decodedProjectUrl.substring('/Portfolio'.length);
+            }
             if (decodedProjectUrl.charAt(0) === '/') {
                 decodedProjectUrl = decodedProjectUrl.substring(1);
             }
