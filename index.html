@@ -334,7 +334,7 @@
                 <p>Autonomous mobile robot <br>(Warehouse Assistant)</p>
                 <div class="portfolio-links">
                   <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                  <a href="Projects/5-bar_Parallel_Robot/" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
+                  <a href="Projects/5-bar_Parallel_Robot/" id="Projects/5-bar_Parallel_Robot/" class="portfolio-details-lightbox" data-glightbox="type: external" title="Portfolio Details"><i class="bx bx-link"></i></a>
                 </div>
               </div>
             </div>
@@ -743,7 +743,25 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectUrl = urlParams.get('project');
+        if (projectUrl) {
+            const decodedProjectUrl = decodeURIComponent(projectUrl);
+            if (decodedProjectUrl.charAt(0) === '/') {
+                decodedProjectUrl = decodedProjectUrl.substring(1);
+            }
+            console.log(decodedProjectUrl);
+            $('html, body').animate({
+                scrollTop: $('#portfolio').offset().top
+            }, 1000, function() {
+                document.getElementById(decodedProjectUrl).click()
+            });
+        }
+    });
+  </script>
 </body>
 
 </html>

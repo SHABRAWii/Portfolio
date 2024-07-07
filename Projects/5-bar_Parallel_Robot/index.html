@@ -131,7 +131,14 @@
 
   <!-- Template Main JS File -->
   <script src="../../assets/js/main.js"></script>
-
+    <!-- Redirect to main page if loaded directly -->
+  <!-- Redirect to main page if loaded directly -->
+  <script>
+    if (window === window.parent) {
+      // Redirect to the main page with project URL as a query parameter
+      window.location.href = "../../index.html?project=" + window.location.pathname;
+    }
+  </script>
 </body>
 
 </html>
