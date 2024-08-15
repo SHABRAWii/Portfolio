@@ -224,10 +224,45 @@
         }
 
         /* Hover state for list items */
-        .roles a:hover {
-            color: #06386e; /* Original color on hover */
+        .roles li a:hover {
+            color: #06386e !important;; /* Original color on hover */
             font-weight: bold; /* Bold text on hover */
         }
+        /* Add this to your CSS to ensure the container clears the floated element */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Apply clearfix to the parent container of the paragraph and image */
+        .parent-container {
+            position: relative;
+            padding: 10px;
+        }
+
+        .parent-container p {
+            text-align: justify;
+        }
+
+        .parent-container img {
+            float: right;
+            max-width: 400px;
+            margin-left: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Fix for when the hash link is clicked */
+        .parent-container:target {
+            padding-left: 20px; /* Adjust this padding as needed */
+        }
+        .parent-container h5{
+            color:#08590a !important;
+}
+
     </style>
 </head>
 
@@ -373,59 +408,77 @@
                 
 
                 <!-- Corresponding Sections -->
-                <section id="software-lead-and-developer">
+                <section id="software-lead-and-developer" class="parent-container clearfix">
                     <h3>Software lead and developer:</h3>
-                    <h4 id="flowchart-plan">As a software lead, I had to build a <strong>flowchart and plan</strong> so we can all share the same goal with compatible steps.</h4>
-                    <h4 id="os-environment">Setup the <strong>OS environment</strong> and needed tools and <strong>backup</strong> certain milestones.</h4>
-                    <h4 id="local-server">Prepare <strong>local server</strong> for <strong>communication</strong> between the RPI and host machine and external controller</h4>
-                    <h4 id="code-review">I worked as <strong>Code reviewer and debugger</strong></h4>
+                    <h5 id="flowchart-plan" style="transform: translateX(8px);">&emsp; As a software lead, <strong>Planning</strong> is one of my responsibilities.</h5>
+                        <p>
+                            <img src="..\..\assets\projects\Autonomous warehouse mobile robot\Software architecture.png" alt="Flowchart" style="width: 100%; max-width: 550px;">
+                            The following charts shows the software architecture of the project. The software is divided into three main parts:
+
+                            <br><br><strong>1.Host Machine:</strong> Responsible for high-level control, including task planning and path planning. It provides a <strong>Webserver Dashboard</strong> for operators to monitor the robot's status and control its functions remotely.
+
+                            <br><br><strong>2.Raspberry Pi 4 B 8Gb:</strong> The heart of the robot's operation, running the <strong>ROS (Robot Operating System)</strong>. The Raspberry Pi handles all control algorithms and hardware interactions. Key features include:
+                            <ul>
+                                <li><strong>Logging System:</strong> Captures and stores operational data, aiding in debugging and performance monitoring.</li>
+                                <li><strong>SLAM (Simultaneous Localization and Mapping):</strong> A critical function that enables the robot to map its surroundings and navigate autonomously within them.</li>
+                                <li><strong>Gazebo Simulation:</strong> Provides a simulated environment for testing algorithms before deployment, ensuring safety and reliability.</li>
+                            </ul>
+                            <br><strong>3.External Controller (ESP32):</strong> Acts as a bridge between the Raspberry Pi and other hardware components. It manages the communication protocols and synchronization needed for the robot's real-time operations. Noteworthy responsibilities include:
+                            <ul>
+                                <li><strong>Omni Wheel Odometry Module:</strong> Responsible for precise calculations of the robot's position and orientation, which are vital for accurate navigation.</li>
+                                <li><strong>Obstacle Avoidance:</strong> Ensures the robot can safely navigate through its environment, avoiding any obstacles in real-time.</li>
+                                <li><strong>Return to Charge Point:</strong> Automatically directs the robot back to its charging station when battery levels are low.</li>
+                            </ul>
+                            Key hardware components such as the <strong>Lidar</strong> sensor, <strong>MPU9250 (9-Axis)</strong> IMU, and the <strong>Stepper Driver</strong> and <strong>Motor</strong> for the Lifting Mechanism are integrated into this architecture, allowing the robot to perform complex tasks with precision and reliability.
+                            <br><br>This architecture not only enhances the robot's operational efficiency but also ensures a scalable solution capable of handling various tasks in dynamic environments.
+                        </p>
+
+
+                        <h5 id="os-environment" style="transform: translateX(8px);">&emsp; Setup the <strong>OS environment</strong> and needed tools and <strong>backup</strong> certain milestones.</h5>
+
+                        <p>
+                            As part of my responsibilities, I installed and prepared an <strong>Ubuntu Focal Fossa</strong> environment, which served as the backbone for all the development and testing processes. To ensure stability and to safeguard against potential issues, I implemented a robust backup strategy at critical milestones during the setup and configuration phases. This approach not only helped in maintaining a stable development environment but also allowed for quick recovery in case of any unexpected failures.
+                        </p>
+
+                        <p>
+                            <img src="..\..\assets\projects\Autonomous warehouse mobile robot\ubuntu-focal-logo.jpg" alt="Ubuntu Logo" style="width: 100px; float: left; margin-right: 20px;">
+                            The choice of Ubuntu Focal Fossa was driven by its LTS (Long Term Support) status, which provides a secure and reliable platform for long-term projects. During the setup, I installed all necessary development tools, configured the environment according to project needs, and ensured that the system was optimized for performance. Regular backups were taken using both <strong>system snapshots</strong> and <strong>external backups</strong> to preserve the state of the environment at crucial points in the development lifecycle.
+                        </p>
+
+                        <p>
+                            Below are some of the key aspects of the OS environment setup:
+                        </p>
+
+                        <ul>
+                            <li><strong>System Installation:</strong> Installed Ubuntu Focal Fossa, selected during the setup process due to its compatibility with ROS and other required software.</li>
+                            <li><strong>Tool Configuration:</strong> Configured essential tools like Git, Docker, and other development utilities.</li>
+                            <li><strong>Backup Strategy:</strong> Established a routine backup schedule, using both local and cloud storage solutions to ensure that all critical milestones were securely saved.</li>
+                        </ul>
+
+                        <p>
+                            <!-- <img src="path/to/your/backup-screenshot.png" alt="Backup Process Screenshot" style="width: 100%; max-width: 550px; border-radius: 10px; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> -->
+                        </p>
+
+                        <p>
+                            This meticulous approach to setting up and maintaining the OS environment not only facilitated smooth development but also provided a safety net, ensuring that work could continue without significant downtime in case of system issues.
+                        </p>
+
+                        <h5 id="local-server" style="transform: translateX(8px);">&emsp; Prepare <strong>local server</strong> for <strong>communication</strong> between the RPI and host machine and external controller</h5>
+                        <h5 id="code-review" style="transform: translateX(8px);">&emsp; I worked as <strong>Code reviewer and debugger</strong></h5>
                 </section>
 
                 <section id="hardware-assistance">
                     <h3>Hardware Assistance:</h3>
-                    <h4 id="hardware-assembly">I worked on <strong>assembling</strong> the <strong>hardware</strong>.</h4>
-                    <h4 id="problem-solving">I was the <strong>key</strong> to <strong>solve crucial problems</strong> (Stepper driver level shifting, motor driver, ...).</h4>
+                    <h5 id="hardware-assembly" style="transform: translateX(8px);">&emsp; I worked on <strong>assembling</strong> the <strong>hardware</strong>.</h5>
+                    <h5 id="problem-solving" style="transform: translateX(8px);">&emsp; I was the <strong>key</strong> to <strong>solve crucial problems</strong> (Stepper driver level shifting, motor driver, ...).</h5>
                 </section>
 
                 <section id="mechanical-assistance">
                     <h3>Mechanical Assistance:</h3>
-                    <h4 id="simulation-work">Despite the perfect work from our mechanical designer - I am proud of being his friend - I managed to work on simulation on simple aspects of lifting mechanism</h4>
-                    <h4 id="torque-calculations">I worked on motor needed <strong>torque calculations</strong></h4>
+                    <h5 id="simulation-work" style="transform: translateX(8px);">&emsp; Despite the perfect work from our mechanical designer - I am proud of being his friend - I managed to work on simulation on simple aspects of lifting mechanism</h5>
+                    <h5 id="torque-calculations" style="transform: translateX(8px);">&emsp; I worked on motor needed <strong>torque calculations</strong></h5>
                 </section>
 
-                <p>Through this project, I honed several technical skills and gained hands-on experience with various technologies, including:</p>
-                <ul>
-                    <li><strong>CAD Modeling:</strong> Used SolidWorks to create detailed 3D models of the robot components.</li>
-                    <li><strong>Control Systems:</strong> Developed control algorithms using MATLAB and Simulink for precise robotic movements.</li>
-                    <li><strong>Computer Vision:</strong> Implemented object recognition algorithms using OpenCV and integrated them with the robotic system.</li>
-                    <li><strong>Programming:</strong> Wrote code in C++ and Python to control the robot and process sensor data.</li>
-                    <li><strong>Prototyping and Testing:</strong> Built physical prototypes and conducted iterative testing to refine the robot's performance.</li>
-                </ul>
-
-                <h3>Challenges and Problem-Solving</h3>
-                <p>One of the significant challenges I encountered was ensuring the robot's accuracy at high speeds. To overcome this, I optimized the control algorithms and used high-precision sensors to minimize errors. Another challenge was synchronizing
-                    the vision system with the robotic movements. I developed a robust calibration process to ensure seamless integration, allowing the robot to accurately sort chocolates based on size, shape, and color.</p>
-
-                <h3>Achievements and Impact</h3>
-                <p>My contributions to the "Autonomous warehouse mobile robot" project led to several notable achievements:</p>
-                <ul>
-                    <li>Successfully designed and developed a highly efficient robotic system capable of sorting chocolates with 99% accuracy.</li>
-                    <li>Improved the robot's sorting speed by 30% through algorithm optimization and sensor integration.</li>
-                    <li>Demonstrated the potential of parallel robotics in delicate and high-speed industrial applications.</li>
-                    <li>Received positive feedback from industry experts during project presentations and showcased the robot's capabilities at a university exhibition.</li>
-                </ul>
-
-                <h3>Learning and Growth</h3>
-                <p>This project was a significant learning experience, allowing me to apply theoretical knowledge to a real-world problem. It enhanced my problem-solving skills, taught me the importance of collaboration, and provided hands-on experience
-                    with advanced technologies. The project also strengthened my interest in robotics and automation, motivating me to pursue further opportunities in this field.</p>
-
-                <h3>Future Directions</h3>
-                <p>Building on the success of the "Autonomous warehouse mobile robot" project, I aim to explore further enhancements such as incorporating artificial intelligence for more advanced sorting capabilities. Additionally, I plan to investigate the use of this
-                    technology in other industries, such as pharmaceuticals and electronics, to expand its applications and impact.</p>
-
-                <h2>Conclusion</h2>
-                <p>The "Autonomous warehouse mobile robot" project was a pivotal experience in my engineering journey. My contributions in design, development, and optimization played a crucial role in the project's success. This experience not only enriched my technical
-                    skills but also solidified my passion for robotics and automation, paving the way for my future endeavors in this exciting field.</p>
                 <div class="swiper-slide video-container">
                     <video autoplay loop muted>
                                       <source src="../../assets/projects/Autonomous warehouse mobile robot/Video 00.mp4" type="video/mp4">
@@ -458,12 +511,8 @@
     <!-- Redirect to main page if loaded directly -->
     <!-- Redirect to main page if loaded directly -->
     <script>
-        if (window === window.parent) {
-            // Redirect to the main page with project URL as a query parameter
-            window.location.href = "../../?project=" + window.location.pathname;
-        }
-    </script>
-    <script>
+     
+
         document.getElementById('copyLinkButton').addEventListener('click', function(event) {
             event.preventDefault();
             const projectLink = window.location.href; // Use the current URL as the project link
@@ -543,6 +592,32 @@
                 }
             }
         });
+
+var _hash = window.location.hash;
+console.log('Initial Hash: ' + _hash);
+
+if (window === window.parent) {
+    // The page is loaded directly, not inside an iframe
+    var mainPageUrl = "../../?project=" + window.location.pathname;
+
+    if (_hash) {
+        // Pass the hash as a query parameter
+        mainPageUrl += "&hash=" + encodeURIComponent(_hash.substring(1));
+    }
+
+    // Load the main page inside an iframe
+    document.body.innerHTML = '<iframe id="project-frame" src="' + mainPageUrl + '" style="width:100%; height:100vh; border:none;"></iframe>';
+}
+window.addEventListener('message', function(event) {
+    if (event.data.action === 'scrollToHash' && event.data.hash) {
+        var targetElement = document.querySelector(event.data.hash);
+        if (targetElement) {
+            console.log('Scrolling inside iframe to: ' + event.data.hash);
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
+
     </script>
 </body>
 
