@@ -416,17 +416,6 @@
                             </ul>
                             <p></p>
                         </div>
-                        <div class="resume-item">
-                            <h4>Technical Director</h4>
-                            <h5>Jan. 2022 - Jan. 2023</h5>
-                            <p><em>Momentum Team, Mansoura University, Egypt</em></p>
-                            <ul>
-                                <li>Train <strong>20</strong> Technical members to be qualified to start their own career in the labor market.</li>
-                                <li>Supervising Technical projects during their implementation period.</li>
-                                <li>Supervising on Trainings provided by our team to students.</li>
-                            </ul>
-                            <p></p>
-                        </div>
                     </div>
                 </div>
 
@@ -879,6 +868,7 @@
     $(document).ready(function(){
             const urlParams = new URLSearchParams(window.location.search);
             const projectUrl = urlParams.get('project');
+             const hash = urlParams.get('hash');
             if (projectUrl) {
                 var decodedProjectUrl = decodeURIComponent(projectUrl);
                 if (decodedProjectUrl.startsWith('/Portfolio')) {
@@ -891,7 +881,17 @@
                 $('html, body').animate({
                     scrollTop: $('#portfolio').offset().top
                 }, 1000, function() {
-                    document.getElementById(decodedProjectUrl).click()
+                    document.getElementById(decodedProjectUrl).click();
+                    if (hash) {
+                        // Pass the hash to the iframe
+                        var iframe = document.querySelector('iframe');
+                        if (iframe) {
+                            iframe.onload = function() {
+                                console.log('Passing hash to iframe: ' + hash);
+                                iframe.contentWindow.postMessage({ action: 'scrollToHash', hash: '#' + hash }, '*');
+                            };
+                        }
+                    }
                 });
             }
         });
