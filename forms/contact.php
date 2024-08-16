@@ -1,41 +1,44 @@
 <?php
-  /**
-  * Requires the "PHP Email Form" library
-  * The "PHP Email Form" library is available only in the pro version of the template
-  * The library should be uploaded to: vendor/php-email-form/php-email-form.php
-  * For more info and help: https://bootstrapmade.com/php-email-form/
-  */
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
-  // Replace contact@example.com with your real receiving email address
-  $receiving_email_address = 'contact@example.com';
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-  if( file_exists($php_email_form = '../assets/vendor/php-email-form/php-email-form.php' )) {
-    include( $php_email_form );
-  } else {
-    die( 'Unable to load the "PHP Email Form" Library!');
-  }
+require 'vendor/autoload.php'; // Adjust this path to where you have Composer installed PHPMailer
 
-  $contact = new PHP_Email_Form;
-  $contact->ajax = true;
-  
-  $contact->to = $receiving_email_address;
-  $contact->from_name = $_POST['name'];
-  $contact->from_email = $_POST['email'];
-  $contact->subject = $_POST['subject'];
+$mail = new PHPMailer(true);
 
-  // Uncomment below code if you want to use SMTP to send emails. You need to enter your correct SMTP credentials
-  /*
-  $contact->smtp = array(
-    'host' => 'example.com',
-    'username' => 'example',
-    'password' => 'pass',
-    'port' => '587'
-  );
-  */
+try {
+    // Retrieve form data
+    $name = isset($_POST['name']) ? $_POST['name'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $subject = isset($_POST['subject']) ? $_POST['subject'] : 'No subject';
+    $message = isset($_POST['message']) ? $_POST['message'] : '';
 
-  $contact->add_message( $_POST['name'], 'From');
-  $contact->add_message( $_POST['email'], 'Email');
-  $contact->add_message( $_POST['message'], 'Message', 10);
+    //Server settings
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'yousef.elshabrawii0@gmail.com';
+    $mail->Password = 'iowu ccsn lqin dpsq';  // Make sure this is correct 
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
 
-  echo $contact->send();
-?>
+    //Recipients
+    $mail->setFrom($email, "Yousef ElShabrawii Portfolio");  // Set sender from the form input
+    $mail->addAddress('yousef.elshabrawii@gmail.com', 'Yousef ElShabrawii'); // Replace with the actual recipient's email
+    $mail->addReplyTo($email, $name); // Reply-to the sender's email from the form
+
+
+    // Content
+    $mail->isHTML(true);
+    $mail->Subject = $subject; // Set subject from the form input
+    $mail->Body    = nl2br($message); // Set message body from the form input and convert newlines to <br>
+    $mail->AltBody = strip_tags($message); // Plain text body for non-HTML mail clients
+    
+echo $mail->send();
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
