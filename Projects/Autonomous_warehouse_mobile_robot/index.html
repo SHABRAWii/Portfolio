@@ -177,7 +177,26 @@
             font-size: 20px;
             margin-bottom: 10px;
         }
-        .swiper-container.gallery-thumbs {
+        .swiper-container.gallery-thumbs1  {
+            margin-top: 25px;
+            height: 100px; /* Smaller height for thumbnails */
+            box-sizing: border-box;
+            margin-bottom: 10px; /* Space between thumbnails and pagination */
+        }
+
+        .swiper-container.gallery-thumbs1 .swiper-slide {
+            width: 60px; /* Smaller width for each thumbnail */
+            height: 100%; /* Keep height proportional */
+            opacity: 0.4; /* Dim inactive thumbnails */
+            transition: opacity 0.3s;
+            cursor: pointer; /* Add pointer cursor for clickability */
+        }
+
+        .swiper-container.gallery-thumbs1 .swiper-slide-thumb-active {
+            opacity: 1; /* Highlight active thumbnail */
+        }
+        .swiper-container.gallery-thumbs  {
+            margin-top: 25px;
             height: 80px; /* Smaller height for thumbnails */
             box-sizing: border-box;
             margin-bottom: 10px; /* Space between thumbnails and pagination */
@@ -261,7 +280,52 @@
         }
         .parent-container h5{
             color:#08590a !important;
-}
+        }
+        
+        /* Button and iframe container styling */
+        /* Adjust iframe container to take the full viewport */
+        #modelFrameContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Ensure iframe takes the full container space */
+        #modelFrame {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        #render3DButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: right;
+            justify-content: right;
+        }
+
+        #render3DButton i {
+            margin-right: 8px;
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            color: rgb(0, 0, 0)  !important;
+            cursor: pointer;
+        }
 
     </style>
 </head>
@@ -315,29 +379,29 @@
 
                             
                             </div>
- <!-- Thumbnails (preview) -->
-    <div class="swiper-container gallery-thumbs">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide">
-                <img src="../../assets/projects/Autonomous warehouse mobile robot/Render.JPG" alt="">
-            </div>
-            <div class="swiper-slide">
-                <img src="../../assets/projects/Autonomous warehouse mobile robot/Render_01.JPG" alt="">
-            </div>
-            <div class="swiper-slide">
-                <img src="../../assets/projects/Autonomous warehouse mobile robot/Robot-01.png" alt="">
-            </div>
-            <div class="swiper-slide">
-                <img src="../../assets/projects/Autonomous warehouse mobile robot/Mechanism-00.png" alt="">
-            </div>
-            <div class="swiper-slide">
-                <img src="../../assets/projects/Autonomous warehouse mobile robot/Mechanism-01.png" alt="">
-            </div>
-            <div class="swiper-slide">
-                <img src="../../assets/projects/Autonomous warehouse mobile robot/Mechanism-02.png" alt="">
-            </div>
-        </div>
-    </div>
+                            <!-- Thumbnails (preview) -->
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Autonomous warehouse mobile robot/Render.JPG" alt="">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Autonomous warehouse mobile robot/Render_01.JPG" alt="">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Autonomous warehouse mobile robot/Robot-01.png" alt="">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Autonomous warehouse mobile robot/Mechanism-00.png" alt="">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Autonomous warehouse mobile robot/Mechanism-01.png" alt="">
+                                    </div>
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Autonomous warehouse mobile robot/Mechanism-02.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="swiper-pagination"></div>
                         </div>
                     </div>
@@ -352,15 +416,29 @@
                                 <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
                             </ul>
                         </div>
+                        <div id="model-preview-container" style="position: relative; text-align: center; margin-top: 20px;">
+                            <button id="render3DButton" style="padding: 15px 25px; background-color: #f1f1f1; color: #333; border: 1px solid #ccc; border-radius: 8px; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: background-color 0.3s, box-shadow 0.3s;">
+                                <img src="..\..\assets\img\3d_render.png" alt="3D Model" style="width: 35px; height: auto; margin-right: 12px;">
+                                <span style="display: flex; align-items: center;">
+                                    <i class="fas fa-cube" style="margin-right: 8px; font-size: 20px;"></i> Render 3D Model
+                                </span>
+                            </button>
+                        </div>
+
+
+                        <!-- Hidden iframe to load the 3D model -->
+                        <div id="modelFrameContainer" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000;">
+                            <button id="closeButton" style="position: absolute; top: 10px; right: 20px; background-color: transparent; border: none; font-size: 24px; color: black; cursor: pointer;">&times;</button>
+                            <iframe id="modelFrame" src="preview_model.html" style="width: 90%; height: 90%; margin: 5% auto; display: block; border: none; border-radius: 10px;"></iframe>
+                        </div>
+
                     </div>
 
                 </div>
-
             </div>
             <div class="portfolio-details">
                 <h2>Project Involvement</h2>
-                <p>As part of <strong>my engineering curriculum</strong>, I had the opportunity to work on the "<span style="color: rgb(8, 86, 8);font-weight: bold;">Autonomous mobile robot</span>", aimed at working in Collaborative environment or on his own. My role in this project encompassed various critical aspects,
-                    from managing the software team and ensure that we achieve our goal and collaborate with them on the project.</p>
+                <p>As part of <strong>my engineering curriculum</strong>, I had the opportunity to work on the "<span style="color: rgb(8, 86, 8);font-weight: bold;">Autonomous mobile robot</span>", aimed at working in Collaborative environment or on his own. </p>
 
                 <h3>Roles and Responsibilities</h3>
                 <p>In the "<span style="color: rgb(8, 86, 8);font-weight: bold;">Autonomous mobile robot</span>" project, I served as the lead developer and crucial part of the team. My responsibilities included:</p>
@@ -390,7 +468,7 @@
                         <a href="#hardware-assembly">I worked on <strong>assembling</strong> the <strong>hardware</strong>.</a>
                     </li>
                     <li>
-                        <a href="#problem-solving">I was the <strong>key</strong> to <strong>solve crucial problems</strong> (Stepper driver level shifting, motor driver, ...).</a>
+                        <a href="#problem-solving">I was the <strong>key</strong> to <strong>solve crucial problems</strong> (Stepper driver level shifting between source and controller, motor driver, ...).</a>
                     </li>
 
                     <!-- Mechanical Assistance Section -->
@@ -405,88 +483,57 @@
                     </li>
                 </ul>
 
-                
-
-                <!-- Corresponding Sections -->
-                <section id="software-lead-and-developer" class="parent-container clearfix">
-                    <h3>Software lead and developer:</h3>
-                    <h5 id="flowchart-plan" style="transform: translateX(8px);">&emsp; As a software lead, <strong>Planning</strong> is one of my responsibilities.</h5>
-                        <p>
-                            <img src="..\..\assets\projects\Autonomous warehouse mobile robot\Software architecture.png" alt="Flowchart" style="width: 100%; max-width: 550px;">
-                            The following charts shows the software architecture of the project. The software is divided into three main parts:
-
-                            <br><br><strong>1.Host Machine:</strong> Responsible for high-level control, including task planning and path planning. It provides a <strong>Webserver Dashboard</strong> for operators to monitor the robot's status and control its functions remotely.
-
-                            <br><br><strong>2.Raspberry Pi 4 B 8Gb:</strong> The heart of the robot's operation, running the <strong>ROS (Robot Operating System)</strong>. The Raspberry Pi handles all control algorithms and hardware interactions. Key features include:
-                            <ul>
-                                <li><strong>Logging System:</strong> Captures and stores operational data, aiding in debugging and performance monitoring.</li>
-                                <li><strong>SLAM (Simultaneous Localization and Mapping):</strong> A critical function that enables the robot to map its surroundings and navigate autonomously within them.</li>
-                                <li><strong>Gazebo Simulation:</strong> Provides a simulated environment for testing algorithms before deployment, ensuring safety and reliability.</li>
-                            </ul>
-                            <br><strong>3.External Controller (ESP32):</strong> Acts as a bridge between the Raspberry Pi and other hardware components. It manages the communication protocols and synchronization needed for the robot's real-time operations. Noteworthy responsibilities include:
-                            <ul>
-                                <li><strong>Omni Wheel Odometry Module:</strong> Responsible for precise calculations of the robot's position and orientation, which are vital for accurate navigation.</li>
-                                <li><strong>Obstacle Avoidance:</strong> Ensures the robot can safely navigate through its environment, avoiding any obstacles in real-time.</li>
-                                <li><strong>Return to Charge Point:</strong> Automatically directs the robot back to its charging station when battery levels are low.</li>
-                            </ul>
-                            Key hardware components such as the <strong>Lidar</strong> sensor, <strong>MPU9250 (9-Axis)</strong> IMU, and the <strong>Stepper Driver</strong> and <strong>Motor</strong> for the Lifting Mechanism are integrated into this architecture, allowing the robot to perform complex tasks with precision and reliability.
-                            <br><br>This architecture not only enhances the robot's operational efficiency but also ensures a scalable solution capable of handling various tasks in dynamic environments.
-                        </p>
-
-
-                        <h5 id="os-environment" style="transform: translateX(8px);">&emsp; Setup the <strong>OS environment</strong> and needed tools and <strong>backup</strong> certain milestones.</h5>
-
-                        <p>
-                            As part of my responsibilities, I installed and prepared an <strong>Ubuntu Focal Fossa</strong> environment, which served as the backbone for all the development and testing processes. To ensure stability and to safeguard against potential issues, I implemented a robust backup strategy at critical milestones during the setup and configuration phases. This approach not only helped in maintaining a stable development environment but also allowed for quick recovery in case of any unexpected failures.
-                        </p>
-
-                        <p>
-                            <img src="..\..\assets\projects\Autonomous warehouse mobile robot\ubuntu-focal-logo.jpg" alt="Ubuntu Logo" style="width: 100px; float: left; margin-right: 20px;">
-                            The choice of Ubuntu Focal Fossa was driven by its LTS (Long Term Support) status, which provides a secure and reliable platform for long-term projects. During the setup, I installed all necessary development tools, configured the environment according to project needs, and ensured that the system was optimized for performance. Regular backups were taken using both <strong>system snapshots</strong> and <strong>external backups</strong> to preserve the state of the environment at crucial points in the development lifecycle.
-                        </p>
-
-                        <p>
-                            Below are some of the key aspects of the OS environment setup:
-                        </p>
-
-                        <ul>
-                            <li><strong>System Installation:</strong> Installed Ubuntu Focal Fossa, selected during the setup process due to its compatibility with ROS and other required software.</li>
-                            <li><strong>Tool Configuration:</strong> Configured essential tools like Git, Docker, and other development utilities.</li>
-                            <li><strong>Backup Strategy:</strong> Established a routine backup schedule, using both local and cloud storage solutions to ensure that all critical milestones were securely saved.</li>
-                        </ul>
-
-                        <p>
-                            <!-- <img src="path/to/your/backup-screenshot.png" alt="Backup Process Screenshot" style="width: 100%; max-width: 550px; border-radius: 10px; border: 1px solid #ddd; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);"> -->
-                        </p>
-
-                        <p>
-                            This meticulous approach to setting up and maintaining the OS environment not only facilitated smooth development but also provided a safety net, ensuring that work could continue without significant downtime in case of system issues.
-                        </p>
-
-                        <h5 id="local-server" style="transform: translateX(8px);">&emsp; Prepare <strong>local server</strong> for <strong>communication</strong> between the RPI and host machine and external controller</h5>
-                        <h5 id="code-review" style="transform: translateX(8px);">&emsp; I worked as <strong>Code reviewer and debugger</strong></h5>
-                </section>
-
-                <section id="hardware-assistance">
-                    <h3>Hardware Assistance:</h3>
-                    <h5 id="hardware-assembly" style="transform: translateX(8px);">&emsp; I worked on <strong>assembling</strong> the <strong>hardware</strong>.</h5>
-                    <h5 id="problem-solving" style="transform: translateX(8px);">&emsp; I was the <strong>key</strong> to <strong>solve crucial problems</strong> (Stepper driver level shifting, motor driver, ...).</h5>
-                </section>
-
-                <section id="mechanical-assistance">
-                    <h3>Mechanical Assistance:</h3>
-                    <h5 id="simulation-work" style="transform: translateX(8px);">&emsp; Despite the perfect work from our mechanical designer - I am proud of being his friend - I managed to work on simulation on simple aspects of lifting mechanism</h5>
-                    <h5 id="torque-calculations" style="transform: translateX(8px);">&emsp; I worked on motor needed <strong>torque calculations</strong></h5>
-                </section>
 
                 <div class="swiper-slide video-container">
                     <video autoplay loop muted>
-                                      <source src="../../assets/projects/Autonomous warehouse mobile robot/Video 00.mp4" type="video/mp4">
-                                      Your browser does not support the video tag.
-                                    </video>
+                        <source src="../../assets/projects/Autonomous warehouse mobile robot/Video 00.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
 
                 </div>
             </div>
+            <div class="col-lg-8" style="margin-left: auto;margin-right: auto;">
+                <div class="portfolio-details-slider swiper swiper1"> <!-- Unique class swiper1 -->
+                    <div class="swiper-wrapper align-items-center">
+
+                        <div class="swiper-slide">
+                            <img src="..\..\assets\projects\Autonomous warehouse mobile robot\Software architecture.png" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img src="../../assets/projects/Autonomous warehouse mobile robot/Motor Calculations.png" alt="">
+                        </div>
+
+                        <div class="swiper-slide">
+                            <img src="../../assets/projects/Autonomous warehouse mobile robot/Brackets SImulation.jpg" alt="">
+                        </div>
+
+                    </div>
+                    <!-- Thumbnails (preview) -->
+                    <div class="swiper-container gallery-thumbs1"> <!-- Unique class swiper-thumbs1 -->
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="..\..\assets\projects\Autonomous warehouse mobile robot\Software architecture.png" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                                <img src="../../assets/projects/Autonomous warehouse mobile robot/Motor Calculations.png" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                                <img src="../../assets/projects/Autonomous warehouse mobile robot/Brackets SImulation.jpg" alt="">
+                            </div>
+
+                            <div class="swiper-slide">
+                                <img src="../../assets/projects/Autonomous warehouse mobile robot/Brackets SImulation.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="swiper-pagination swiper-pagination1"></div> <!-- Unique class swiper-pagination1 -->
+                </div>
+            </div>
+            <br><br>
         </section>
         <!-- End Portfolio Details Section -->
 
@@ -522,28 +569,62 @@
                 console.error('Failed to copy: ', err);
             });
         });
-        var galleryThumbs = new Swiper('.gallery-thumbs', {
+        // Add event listener for the 3D render button
+        document.getElementById('render3DButton').addEventListener('click', function() {
+            const mainContent = document.getElementById('main');
+            const modelFrameContainer = document.createElement('div');
+            modelFrameContainer.id = 'modelFrameContainer';
+            modelFrameContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center;';
+            
+            const closeButton = document.createElement('button');
+            closeButton.id = 'closeButton';
+            closeButton.style.cssText = 'position: absolute; top: 10px; right: 20px; background-color: transparent; border: none; font-size: 24px; color: white; cursor: pointer;';
+            closeButton.innerHTML = '&times;';
+            closeButton.addEventListener('click', function() {
+                document.body.removeChild(modelFrameContainer);
+                mainContent.style.display = 'block'; // Show main content again
+            });
+
+            const iframe = document.createElement('iframe');
+            iframe.id = 'modelFrame';
+            iframe.src = 'preview_model.html';
+            iframe.style.cssText = 'width: 100%; height: 100%; border: none;';
+
+            modelFrameContainer.appendChild(closeButton);
+            modelFrameContainer.appendChild(iframe);
+            document.body.appendChild(modelFrameContainer);
+
+            mainContent.style.display = 'none'; // Hide main content
+        });
+
+        // document.getElementById('closeButton').addEventListener('click', function() {
+        //     document.getElementById('modelFrameContainer').style.display = 'none';
+        // });
+
+         // First Swiper instance (Original)
+        var galleryThumbs1 = new Swiper('.gallery-thumbs', {
             spaceBetween: 10,
             slidesPerView: 6, // Adjust based on the number of thumbnails
             freeMode: true,
             watchSlidesVisibility: true,
             watchSlidesProgress: true,
         });
-        galleryThumbs.slides[0].classList.add('swiper-slide-thumb-active');
-        var galleryTop = new Swiper('.portfolio-details-slider', {
+        galleryThumbs1.slides[0].classList.add('swiper-slide-thumb-active');
+
+        var galleryTop1 = new Swiper('.portfolio-details-slider', {
             spaceBetween: 10,
         });
 
-        function updateActiveThumbnail(index) {            
-            galleryThumbs.slides.forEach(function(slide) {
+        function updateActiveThumbnail1(index) {            
+            galleryThumbs1.slides.forEach(function(slide) {
                 slide.classList.remove('swiper-slide-thumb-active');
             });
-            if (galleryThumbs.slides[index]) {
-                galleryThumbs.slides[index].classList.add('swiper-slide-thumb-active');
+            if (galleryThumbs1.slides[index]) {
+                galleryThumbs1.slides[index].classList.add('swiper-slide-thumb-active');
             }
         }
 
-        function getActiveSlideIndexFromData() {
+        function getActiveSlideIndexFromData1() {
             var activeSlide = document.querySelector('.portfolio-details-slider .swiper-slide-active');
             if (activeSlide) {
                 var index = parseInt(activeSlide.getAttribute('data-swiper-slide-index'), 10);
@@ -552,30 +633,30 @@
             return null;
         }
 
-        // MutationObserver to detect changes in the active slide
-        var observer = new MutationObserver(function(mutations) {
+        // MutationObserver for the first Swiper instance
+        var observer1 = new MutationObserver(function(mutations) {
             mutations.forEach(function(mutation) {
                 if (mutation.target.classList.contains('swiper-slide-active')) {
-                    var activeIndex = getActiveSlideIndexFromData();
+                    var activeIndex = getActiveSlideIndexFromData1();
                     if (activeIndex !== null) {
-                        updateActiveThumbnail(activeIndex);
+                        updateActiveThumbnail1(activeIndex);
                     }
                 }
             });
         });
 
-        // Observe the swiper-wrapper for changes
-        var targetNode = document.querySelector('.portfolio-details-slider .swiper-wrapper');
-        if (targetNode) {
-            observer.observe(targetNode, {
+        // Observe the swiper-wrapper for the first Swiper instance
+        var targetNode1 = document.querySelector('.portfolio-details-slider .swiper-wrapper');
+        if (targetNode1) {
+            observer1.observe(targetNode1, {
                 attributes: true, // Listen for attribute changes
                 subtree: true,    // Observe all descendants, not just the direct child
                 attributeFilter: ['class'] // Only observe changes to the 'class' attribute
             });
         }
 
-        // Handle click events on thumbnails
-        galleryThumbs.on('click', function(swiper) {
+        // Handle click events on thumbnails for the first Swiper instance
+        galleryThumbs1.on('click', function(swiper) {
             if (!swiper.clickedSlide) {
                 return;
             }
@@ -593,30 +674,106 @@
             }
         });
 
-var _hash = window.location.hash;
-console.log('Initial Hash: ' + _hash);
 
-if (window === window.parent) {
-    // The page is loaded directly, not inside an iframe
-    var mainPageUrl = "../../?project=" + window.location.pathname;
+        // Second Swiper instance (Duplicate)
+        var galleryThumbs2 = new Swiper('.gallery-thumbs1', {
+            spaceBetween: 10,
+            slidesPerView: 3, // Adjust based on the number of thumbnails
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        galleryThumbs2.slides[0].classList.add('swiper-slide-thumb-active');
 
-    if (_hash) {
-        // Pass the hash as a query parameter
-        mainPageUrl += "&hash=" + encodeURIComponent(_hash.substring(1));
-    }
+        var galleryTop2 = new Swiper('.swiper1', {
+            spaceBetween: 10,
+        });
 
-    // Load the main page inside an iframe
-    document.body.innerHTML = '<iframe id="project-frame" src="' + mainPageUrl + '" style="width:100%; height:100vh; border:none;"></iframe>';
-}
-window.addEventListener('message', function(event) {
-    if (event.data.action === 'scrollToHash' && event.data.hash) {
-        var targetElement = document.querySelector(event.data.hash);
-        if (targetElement) {
-            console.log('Scrolling inside iframe to: ' + event.data.hash);
-            targetElement.scrollIntoView({ behavior: 'smooth' });
+        function updateActiveThumbnail2(index) {            
+            galleryThumbs2.slides.forEach(function(slide) {
+                slide.classList.remove('swiper-slide-thumb-active');
+            });
+            if (galleryThumbs2.slides[index]) {
+                galleryThumbs2.slides[index].classList.add('swiper-slide-thumb-active');
+            }
         }
-    }
-});
+
+        function getActiveSlideIndexFromData2() {
+            var activeSlide = document.querySelector('.swiper1 .swiper-slide-active');
+            if (activeSlide) {
+                var index = parseInt(activeSlide.getAttribute('data-swiper-slide-index'), 10);
+                return index;
+            }
+            return null;
+        }
+
+        // MutationObserver for the second Swiper instance
+        var observer2 = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.classList.contains('swiper-slide-active')) {
+                    var activeIndex = getActiveSlideIndexFromData2();
+                    if (activeIndex !== null) {
+                        updateActiveThumbnail2(activeIndex);
+                    }
+                }
+            });
+        });
+
+        // Observe the swiper-wrapper for the second Swiper instance
+        var targetNode2 = document.querySelector('.swiper1 .swiper-wrapper');
+        if (targetNode2) {
+            observer2.observe(targetNode2, {
+                attributes: true, // Listen for attribute changes
+                subtree: true,    // Observe all descendants, not just the direct child
+                attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+            });
+        }
+
+        // Handle click events on thumbnails for the second Swiper instance
+        galleryThumbs2.on('click', function(swiper) {
+            if (!swiper.clickedSlide) {
+                return;
+            }
+            var clickedSlide = swiper.clickedSlide;
+            var clickedIndex = Array.prototype.indexOf.call(swiper.slides, clickedSlide);
+
+            if (clickedIndex !== null && clickedIndex !== undefined) {
+                clickedIndex = parseInt(clickedIndex, 10);
+
+                // Trigger the corresponding pagination bullet
+                var paginationBullets = document.querySelectorAll('.swiper-pagination1 .swiper-pagination-bullet');
+                if (paginationBullets[clickedIndex]) {
+                    paginationBullets[clickedIndex].click();
+                }
+            }
+        });
+
+
+        var _hash = window.location.hash;
+        console.log('Initial Hash: ' + _hash);
+
+        if (window === window.parent) {
+            // The page is loaded directly, not inside an iframe
+            var mainPageUrl = "../../?project=" + window.location.pathname;
+
+            if (_hash) {
+                // Pass the hash as a query parameter
+                mainPageUrl += "&hash=" + encodeURIComponent(_hash.substring(1));
+            }
+
+            // Load the main page inside an iframe
+            document.body.innerHTML = '<iframe id="project-frame" src="' + mainPageUrl + '" style="width:100%; height:100vh; border:none;"></iframe>';
+        }
+        window.addEventListener('message', function(event) {
+            if (event.data.action === 'scrollToHash' && event.data.hash) {
+                var targetElement = document.querySelector(event.data.hash);
+                if (targetElement) {
+                    console.log('Scrolling inside iframe to: ' + event.data.hash);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
 
     </script>
 </body>

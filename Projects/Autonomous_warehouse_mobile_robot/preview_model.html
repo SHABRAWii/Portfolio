@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Viewer - GLTF/GLB</title>
+    <style>
+        body { margin: 0; font-family: Arial, sans-serif; }
+        canvas { display: block; }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+</head>
+<body>
+
+<script>
+    function init() {
+
+        // Load the PNG image as a texture
+        const textureLoader = new THREE.TextureLoader();
+        textureLoader.load('sunnykitchen.png', function(texture) {
+            // Set the texture as the scene background
+            scene.background = texture;
+        }, undefined, function(error) {
+            console.error('An error happened while loading the background image:', error);
+        });
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0xffffff, 1); // Set background color to white
+        renderer.shadowMap.enabled = true;   // Enable shadow maps
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Soft shadow
+        document.body.appendChild(renderer.domElement);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+
+        // Directional light settings
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
+        directionalLight.position.set(8, 10, -2);
+        directionalLight.castShadow = true;  // Enable shadows for this light
+
+        // Increase shadow map resolution for softer shadows
+        directionalLight.shadow.mapSize.width = 4096; // Try a higher value for more detail
+        directionalLight.shadow.mapSize.height = 4096;
+
+        // Adjust the shadow bias to remove the lines
+        directionalLight.shadow.bias = -0.0001; // Fine-tune this value if needed
+
+        directionalLight.shadow.camera.near = 0.5;
+        directionalLight.shadow.camera.far = 500;
+        directionalLight.shadow.camera.left = -10;
+        directionalLight.shadow.camera.right = 10;
+        directionalLight.shadow.camera.top = 10;
+        directionalLight.shadow.camera.bottom = -10;
+
+        scene.add(directionalLight);
+
+
+        // Add ground plane to receive shadows
+        const planeGeometry = new THREE.PlaneGeometry(200, 200);
+        const planeMaterial = new THREE.ShadowMaterial({ opacity: 0.5 });
+        const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+        plane.rotation.x = -Math.PI / 2;
+        plane.position.y = -0.101;
+        plane.position.x = -1;
+        plane.receiveShadow = true;  // Make the plane receive shadows
+        scene.add(plane);
+
+        // Add orbit controls
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true; // Enable damping for smooth orbiting
+        controls.dampingFactor = 0.1;
+        controls.enablePan = true;
+        controls.enableZoom = true;
+        controls.zoomSpeed = 1.5;
+        controls.minDistance = 0.1;
+        controls.maxDistance = 1000;
+
+        // Load the GLTF/GLB model
+        const loader = new THREE.GLTFLoader();
+        loader.load('R3_BOT.gltf', function(gltf) {
+            const model = gltf.scene;
+            model.traverse(function(node) {
+                if (node.isMesh) {
+                    node.castShadow = true;    // Make the object cast shadows
+                    node.receiveShadow = true; // Make the object receive shadows
+                }
+            });
+
+            scene.add(model);
+
+            // Center the model and set the camera
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            model.position.sub(center);
+
+            const size = box.getSize(new THREE.Vector3());
+            const maxDim = Math.max(size.x, size.y, size.z);
+            const fov = camera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / 2 * Math.tan(fov * 2)); 
+            cameraZ *= 1.5; // Adjust zoom out distance
+
+            // Set the camera to an isometric view
+            
+            camera.position.set(model.position.x + 1.1, model.position.y + 1.5, model.position.z + 1.5);
+            // controls.target.copy(center);
+            // controls.update();
+            controls.target = new THREE.Vector3(0,0,0);
+            controls.update();
+        }, undefined, function(error) {
+            console.error('An error happened while loading the model:', error);
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    }
+
+    init();
+</script>
+
+</body>
+</html>
