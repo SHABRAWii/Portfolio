@@ -7,13 +7,30 @@
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
         canvas { display: block; }
+                /* Instructions overlay */
+        #instructions {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(0, 0, 0, 0.7); /* Slightly transparent background */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 10; /* Ensure it stays on top */
+            max-width: 300px; /* Optional: limit the width */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 </head>
 <body>
-
+    <div id="instructions">
+        <strong>3D Model Viewer Instructions</strong>
+        <p>Use your mouse or touch gestures to rotate, zoom, and pan the model.</p>
+    </div>
 <script>
     function init() {
 
