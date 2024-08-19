@@ -775,32 +775,9 @@
             }
         });
 
-
-        var _hash = window.location.hash;
-        console.log('Initial Hash: ' + _hash);
-
         if (window === window.parent) {
-            // The page is loaded directly, not inside an iframe
-            var mainPageUrl = "../../?project=" + window.location.pathname;
-
-            if (_hash) {
-                // Pass the hash as a query parameter
-                mainPageUrl += "&hash=" + encodeURIComponent(_hash.substring(1));
-            }
-
-            // Load the main page inside an iframe
-            document.body.innerHTML = '<iframe id="project-frame" src="' + mainPageUrl + '" style="width:100%; height:100vh; border:none;"></iframe>';
+            window.location.href = "../../?project=" + window.location.pathname;
         }
-        window.addEventListener('message', function(event) {
-            if (event.data.action === 'scrollToHash' && event.data.hash) {
-                var targetElement = document.querySelector(event.data.hash);
-                if (targetElement) {
-                    console.log('Scrolling inside iframe to: ' + event.data.hash);
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-                }
-            }
-        });
-
 
     </script>
 </body>
