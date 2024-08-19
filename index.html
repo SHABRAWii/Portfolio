@@ -878,6 +878,8 @@
                     decodedProjectUrl = decodedProjectUrl.substring(1);
                 }
                 console.log(decodedProjectUrl);
+                // Push the state with the correct project URL
+                window.history.pushState(null, null, '/' + decodedProjectUrl);
                 $('html, body').animate({
                     scrollTop: $('#portfolio').offset().top
                 }, 1000, function() {
