@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Model Viewer - GLTF/GLB</title>
+    <title>Autonomous warehouse mobile robot</title>
     <style>
         body { margin: 0; font-family: Arial, sans-serif; }
         canvas { display: block; }
@@ -62,8 +62,8 @@
         directionalLight.castShadow = true;  // Enable shadows for this light
 
         // Increase shadow map resolution for softer shadows
-        directionalLight.shadow.mapSize.width = 4096; // Try a higher value for more detail
-        directionalLight.shadow.mapSize.height = 4096;
+        directionalLight.shadow.mapSize.width = 2048; // Try a higher value for more detail
+        directionalLight.shadow.mapSize.height = 2048;
 
         // Adjust the shadow bias to remove the lines
         directionalLight.shadow.bias = -0.0001; // Fine-tune this value if needed
@@ -91,12 +91,13 @@
         // Add orbit controls
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true; // Enable damping for smooth orbiting
-        controls.dampingFactor = 0.1;
+        controls.dampingFactor = 0.2;  // Increase damping for smoothness
+        controls.rotateSpeed = 1.5;    // Increase for faster rotation
         controls.enablePan = true;
         controls.enableZoom = true;
         controls.zoomSpeed = 1.5;
         controls.minDistance = 0.1;
-        controls.maxDistance = 1000;
+        controls.maxDistance = 3;
 
         // Load the GLTF/GLB model
         const loader = new THREE.GLTFLoader();
@@ -132,7 +133,14 @@
         }, undefined, function(error) {
             console.error('An error happened while loading the model:', error);
         });
-
+        // Resize handler
+        window.addEventListener('resize', () => {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+            renderer.setSize(width, height);
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+        });
         function animate() {
             requestAnimationFrame(animate);
             controls.update();
