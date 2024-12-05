@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Warehouse workstation</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        
+        .portfolio-details-slider {
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            transform: translateX(-50px);
+        }
+        
+        .swiper-container {
+            overflow: visible;
+        }
+        
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 350px;
+        }
+        
+        .swiper-slide img,
+        .swiper-slide video {
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .swiper-slide img:hover,
+        .swiper-slide video:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .swiper-pagination-bullet {
+            background: #007bff;
+            opacity: 1;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: #0056b3;
+        }
+        
+        .copy-link-button {
+            display: flex;
+            align-items: center;
+            color: blue;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            /* Positioning the button */
+            top: 10px;
+            /* Adjust the top position as needed */
+            right: 10px;
+            /* Adjust the right position as needed */
+            background-color: white;
+            /* Background color for contrast */
+            padding: 5px 10px;
+            /* Padding for better click area */
+            border-radius: 5px;
+            /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for depth */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            /* Smooth transition for hover effects */
+        }
+        
+        .copy-link-button img {
+            margin-left: 5px;
+            width: 18px;
+            /* Adjust the size of the icon as needed */
+            height: 18px;
+        }
+        
+        .copy-link-button:hover {
+            transform: scale(1.05);
+            /* Slightly enlarge on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* Darker shadow on hover */
+            color: blue;
+            /* Ensure color doesn't change on hover */
+            text-decoration: none;
+            /* Ensure no underline on hover */
+        }
+        /* Portfolio details styles */
+        
+        .portfolio-details {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-details h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-details p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-details h3 {
+            color: #007bff;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .swiper-container.gallery-thumbs1  {
+            margin-top: 25px;
+            height: 100px; /* Smaller height for thumbnails */
+            box-sizing: border-box;
+            margin-bottom: 10px; /* Space between thumbnails and pagination */
+        }
+
+        .swiper-container.gallery-thumbs1 .swiper-slide {
+            width: 60px; /* Smaller width for each thumbnail */
+            height: 100%; /* Keep height proportional */
+            opacity: 0.4; /* Dim inactive thumbnails */
+            transition: opacity 0.3s;
+            cursor: pointer; /* Add pointer cursor for clickability */
+        }
+
+        .swiper-container.gallery-thumbs1 .swiper-slide-thumb-active {
+            opacity: 1; /* Highlight active thumbnail */
+        }
+        .swiper-container.gallery-thumbs  {
+            margin-top: 25px;
+            height: 80px; /* Smaller height for thumbnails */
+            box-sizing: border-box;
+            margin-bottom: 10px; /* Space between thumbnails and pagination */
+        }
+
+        .swiper-container.gallery-thumbs .swiper-slide {
+            width: 60px; /* Smaller width for each thumbnail */
+            height: 100%; /* Keep height proportional */
+            opacity: 0.4; /* Dim inactive thumbnails */
+            transition: opacity 0.3s;
+            cursor: pointer; /* Add pointer cursor for clickability */
+        }
+
+        .swiper-container.gallery-thumbs .swiper-slide-thumb-active {
+            opacity: 1; /* Highlight active thumbnail */
+        }
+
+        /* Main Swiper */
+        .portfolio-details-slider {
+            width: 100%; /* Full width */
+            height: auto; /* Adjust height based on content */
+        }
+
+        .swiper-pagination {
+            margin-top: 10px; /* Add margin to create space between thumbnails and pagination */
+        }
+        /* Normal state for h6 and a */
+        .roles h6 a {
+            color: #287ad1 !important; /* Inherit color from the parent, typically the default link color */
+            text-decoration: none; /* No underline by default */
+            transition: color 0.2s, font-weight 0.2s; /* Smooth transition for color and font weight */
+        }
+
+        /* Hover state for h6 and a */
+        .roles h6 a:hover {
+            color: #06386e; /* Color on hover */
+            font-weight: bold; /* Bold text on hover */
+        }
+
+        /* Normal state for list items */
+        .roles li a {
+            color: black !important; /* Default color for list items */
+            transition: color 0.2s, font-weight 0.2s; /* Smooth transition for color and font weight */
+        }
+
+        /* Hover state for list items */
+        .roles li a:hover {
+            color: #06386e !important;; /* Original color on hover */
+            font-weight: bold; /* Bold text on hover */
+        }
+        /* Add this to your CSS to ensure the container clears the floated element */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Apply clearfix to the parent container of the paragraph and image */
+        .parent-container {
+            position: relative;
+            padding: 10px;
+        }
+
+        .parent-container p {
+            text-align: justify;
+        }
+
+        .parent-container img {
+            float: right;
+            max-width: 400px;
+            margin-left: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Fix for when the hash link is clicked */
+        .parent-container:target {
+            padding-left: 20px; /* Adjust this padding as needed */
+        }
+        .parent-container h5{
+            color:#08590a !important;
+        }
+        
+        /* Button and iframe container styling */
+        /* Adjust iframe container to take the full viewport */
+        #modelFrameContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Ensure iframe takes the full container space */
+        #modelFrame {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        #render3DButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: right;
+            justify-content: right;
+        }
+
+        #render3DButton i {
+            margin-right: 8px;
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            color: rgb(0, 0, 0)  !important;
+            cursor: pointer;
+        }
+        /* Parent container to hold the text and video side by side */
+        .text-video-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        /* Styling the video to align to the right */
+        .text-video-container video {
+            max-width: 400px; /* Set a maximum width for the video */
+            margin-left: 20px; /* Add some space between text and video */
+            margin-top: 20px; /* Move the video down */
+            margin-right: -40px; 
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Styling the text to ensure proper wrapping */
+        .text-video-container .text-content {
+            flex: 1; /* Allows the text to take up available space */
+            max-width: calc(100% - 420px); /* Ensure text does not overlap the video */
+            min-width: 300px;
+        }
+
+        /* Ensure proper responsiveness on smaller screens */
+        @media (max-width: 768px) {
+            .text-video-container {
+                flex-direction: column;
+            }
+
+            .text-video-container video {
+                margin-left: 0;
+                margin-top: 20px;
+                max-width: 100%;
+            }
+
+            .text-video-container .text-content {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs ======= -->
+        <a href="#" class="copy-link-button" id="copyLinkButton">
+          Copy Link &nbsp;
+            <img src="..\..\assets\img\copy_link.png" alt="Copy Link" style="width: 15px;">
+        </a>
+
+
+
+        <!-- ======= Portfolio Details Section ======= -->
+        <section id="portfolio-details" class="portfolio-details">
+            <div class="container">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-8">
+                        <div class="portfolio-details-slider swiper">
+                            <div class="swiper-wrapper align-items-center">
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/V2.0.png" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/V1.0.png" alt="">
+                                </div>
+
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 1.jpg" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 2.jpg" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 3.jpg" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 4.jpg" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 5.jpg" alt="">
+                                </div>
+
+                            </div>
+                            <!-- Thumbnails (preview) -->
+                            <div class="swiper-container gallery-thumbs">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/V1.0.png" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/V2.0.png" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 1.jpg" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 2.jpg" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 3.jpg" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 4.jpg" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Warehouse_Workstaions_WL-Co/Wladimir Coka WH V2.0. 5.jpg" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="portfolio-info">
+                            <h3>Project Information</h3>
+                            <ul>
+                                <li><strong>Category:</strong> Mechanical Design & Automation</li>
+                                <li><strong>Client:</strong> Logihub Company</li>
+                                <li><strong>Project date:</strong> October 2024</li>
+                                <li><strong>Project URL</strong>: <a href="#This is auto set" id="project-url">Click Here</a></li>
+                            </ul>
+                        </div>
+                        <div id="model-preview-container" style="position: relative; text-align: center; margin-top: 20px;">
+                            <!-- Button for V2.0 -->
+                            <button id="render3DButtonV2" style="padding: 15px 25px; background: linear-gradient(135deg, #6e8efb, #a777e3); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: background 0.3s, transform 0.2s, box-shadow 0.3s;">
+                                <img src="..\..\assets\img\3d_render.png" alt="3D Model V2.0" style="width: 55px; height: auto; margin-right: 12px;">
+                                <span style="display: flex; align-items: center;">
+                                    <i class="fas fa-cube" style="margin-right: 8px; font-size: 20px;"></i> Render V2.0 Model
+                                </span>
+                            </button>
+                            <br>
+                            <!-- Button for V1.0 -->
+                            <button id="render3DButtonV1" style="padding: 15px 25px; background: linear-gradient(135deg, #6e8efb, #a777e3); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: background 0.3s, transform 0.2s, box-shadow 0.3s;">
+                                <img src="..\..\assets\img\3d_render.png" alt="3D Model V1.0" style="width: 55px; height: auto; margin-right: 12px;">
+                                <span style="display: flex; align-items: center;">
+                                    <i class="fas fa-cube" style="margin-right: 8px; font-size: 20px;"></i> Render V1.0 Model
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+
+
+                    <div class="text-video-container">
+                        <div class="portfolio-details text-content">
+                            <h2>Automated Box Processing Station (V1.0 & V2.0)</h2>
+
+                            <h3>Overview</h3>
+                            <p>
+                                This project focused on solving an <strong>automation problem</strong> to streamline the box processing workflow. 
+                                The solution involved designing an automated station that integrates key components, including a 
+                                <strong>weight scale</strong>, <strong>labeling machine</strong>, <strong>camera</strong>, and <strong>display screen</strong>, 
+                                all strategically positioned to maximize efficiency. The station's objective was to enable faster and more accurate box 
+                                processing while maintaining a user-friendly interface.
+                            </p>
+
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li><strong>Integrated System:</strong> Incorporated critical components like a weight scale, labeling machine, and a camera for streamlined operation.</li>
+                                <li><strong>User Interface:</strong> Positioned a display screen for easy monitoring and interaction, enhancing usability.</li>
+                                <li><strong>Modular Design:</strong> Built on an <strong>8020 aluminum extrusion system</strong>, ensuring durability, cost-efficiency, and flexibility.</li>
+                            </ul>
+
+                            <h3>Role & Responsibilities</h3>
+                            <p>As the lead <strong>Mechanical Designer</strong>, I was responsible for:</p>
+                            <ul class="roles">
+                                <li>
+                                    <a href="#conceptual-design">
+                                        <strong>Conceptualizing & Designing:</strong> Developed the entire mechanical design of the station, ensuring both functionality and aesthetic appeal.
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#optimization">
+                                        <strong>Optimization:</strong> Adjusted component placement in Version 2.0 for enhanced efficiency.
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#supplier-coordination">
+                                        <strong>Supplier Coordination:</strong> Identified reliable distributors and managed order preparation to ensure timely delivery for the client.
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#cost-management">
+                                        <strong>Cost Management:</strong> Designed the system using <strong>8020 components</strong> to achieve a balance between cost and functionality.
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <h3>Major Upgrades (V2.0)</h3>
+                            <ul>
+                                <li><strong>Optimized Layout:</strong> Adjusted the placement of the weight scale, labeling machine, and camera for smoother workflow and better ergonomics.</li>
+                                <li><strong>Enhanced Usability:</strong> Refined the design for easier access and operation by the end-user.</li>
+                            </ul>
+
+                            <h3>Technical Details</h3>
+                            <ul>
+                                <li><strong>Design Tools:</strong> Employed advanced CAD software to create a detailed 3D model and conduct simulations.</li>
+                                <li><strong>Materials:</strong> Used <strong>8020 aluminum extrusion profiles</strong> for a modular, lightweight, and durable structure.</li>
+                                <li><strong>Focus Areas:</strong> Paid meticulous attention to detail to deliver a station with a unique, polished appearance while ensuring full functionality.</li>
+                            </ul>
+
+                            <h3>Outcome</h3>
+                            <p>
+                                While this project is the first of its kind, the station's design is highly functional and ready for implementation. 
+                                The modular approach ensures adaptability for future upgrades or variations, making it a scalable solution for 
+                                automation in box processing.
+                            </p>
+                        </div>
+                    </div>
+            </div>
+            <div class="col-lg-8" style="margin-left: auto;margin-right: auto;">
+                <div class="portfolio-details-slider swiper swiper1"> <!-- Unique class swiper1 -->
+                    <div class="swiper-wrapper align-items-center">
+
+                        
+
+                    </div>
+                    <!-- Thumbnails (preview) -->
+                    <div class="swiper-container gallery-thumbs1"> <!-- Unique class swiper-thumbs1 -->
+                        <div class="swiper-wrapper">
+                            
+                        </div>
+                    </div>
+                    <br>
+                    <div class="swiper-pagination swiper-pagination1"></div> <!-- Unique class swiper-pagination1 -->
+                </div>
+            </div>
+            <br><br>
+        </section>
+        <!-- End Portfolio Details Section -->
+
+    </main><!-- End #main -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../../assets/vendor/aos/aos.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/typed.js/typed.umd.js"></script>
+    <script src="../../assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../assets/js/main.js"></script>
+    <!-- Redirect to main page if loaded directly -->
+    <!-- Redirect to main page if loaded directly -->
+    <script>
+        // Get the current page URL
+        const currentUrl = window.location.href;
+
+        // Select the anchor tag
+        const projectUrlElement = document.getElementById('project-url');
+
+        // Set the href and text content dynamically
+        projectUrlElement.href = currentUrl;
+
+        document.getElementById('copyLinkButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            const projectLink = window.location.href; // Use the current URL as the project link
+            navigator.clipboard.writeText(projectLink).then(() => {
+                // alert('Link copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+        // Add event listener for V1.0 3D render button
+        document.getElementById('render3DButtonV1').addEventListener('click', function () {
+            createModelViewer('preview_model_V1.html');
+        });
+
+        // Add event listener for V2.0 3D render button
+        document.getElementById('render3DButtonV2').addEventListener('click', function () {
+            createModelViewer('preview_model_V2.html');
+        });
+        // Function to create the model viewer
+        function createModelViewer(modelUrl) {
+            const mainContent = document.getElementById('main');
+            const modelFrameContainer = document.createElement('div');
+            modelFrameContainer.id = 'modelFrameContainer';
+            modelFrameContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center;';
+
+            const closeButton = document.createElement('button');
+            closeButton.id = 'closeButton';
+            closeButton.style.cssText = 'position: absolute; top: 10px; right: 20px; background-color: transparent; border: none; font-size: 24px; color: white; cursor: pointer;';
+            closeButton.innerHTML = '&times;';
+            closeButton.addEventListener('click', function () {
+                document.body.removeChild(modelFrameContainer);
+                mainContent.style.display = 'block'; // Show main content again
+            });
+
+            const iframe = document.createElement('iframe');
+            iframe.id = 'modelFrame';
+            iframe.src = modelUrl;
+            iframe.style.cssText = 'width: 100%; height: 100%; border: none;';
+
+            modelFrameContainer.appendChild(closeButton);
+            modelFrameContainer.appendChild(iframe);
+            document.body.appendChild(modelFrameContainer);
+
+            mainContent.style.display = 'none'; // Hide main content
+        }
+
+        // document.getElementById('closeButton').addEventListener('click', function() {
+        //     document.getElementById('modelFrameContainer').style.display = 'none';
+        // });
+
+         // First Swiper instance (Original)
+        var galleryThumbs1 = new Swiper('.gallery-thumbs', {
+            spaceBetween: 10,
+            slidesPerView: 6, // Adjust based on the number of thumbnails
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        // galleryThumbs1.slides[0].classList.add('swiper-slide-thumb-active');
+
+        var galleryTop1 = new Swiper('.portfolio-details-slider', {
+            spaceBetween: 10,
+        });
+
+        function updateActiveThumbnail1(index) {            
+            galleryThumbs1.slides.forEach(function(slide) {
+                slide.classList.remove('swiper-slide-thumb-active');
+            });
+            if (galleryThumbs1.slides[index]) {
+                galleryThumbs1.slides[index].classList.add('swiper-slide-thumb-active');
+            }
+        }
+
+        function getActiveSlideIndexFromData1() {
+            var activeSlide = document.querySelector('.portfolio-details-slider .swiper-slide-active');
+            if (activeSlide) {
+                var index = parseInt(activeSlide.getAttribute('data-swiper-slide-index'), 10);
+                return index;
+            }
+            return null;
+        }
+
+        // MutationObserver for the first Swiper instance
+        var observer1 = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.classList.contains('swiper-slide-active')) {
+                    var activeIndex = getActiveSlideIndexFromData1();
+                    if (activeIndex !== null) {
+                        updateActiveThumbnail1(activeIndex);
+                    }
+                }
+            });
+        });
+
+        // Observe the swiper-wrapper for the first Swiper instance
+        var targetNode1 = document.querySelector('.portfolio-details-slider .swiper-wrapper');
+        if (targetNode1) {
+            observer1.observe(targetNode1, {
+                attributes: true, // Listen for attribute changes
+                subtree: true,    // Observe all descendants, not just the direct child
+                attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+            });
+        }
+
+        // Handle click events on thumbnails for the first Swiper instance
+        galleryThumbs1.on('click', function(swiper) {
+            if (!swiper.clickedSlide) {
+                return;
+            }
+            var clickedSlide = swiper.clickedSlide;
+            var clickedIndex = Array.prototype.indexOf.call(swiper.slides, clickedSlide);
+
+            if (clickedIndex !== null && clickedIndex !== undefined) {
+                clickedIndex = parseInt(clickedIndex, 10);
+
+                // Trigger the corresponding pagination bullet
+                var paginationBullets = document.querySelectorAll('.swiper-pagination-bullet');
+                if (paginationBullets[clickedIndex]) {
+                    paginationBullets[clickedIndex].click();
+                }
+            }
+        });
+
+
+        // Second Swiper instance (Duplicate)
+        var galleryThumbs2 = new Swiper('.gallery-thumbs1', {
+            spaceBetween: 10,
+            slidesPerView: 4, // Adjust based on the number of thumbnails
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        // galleryThumbs2.slides[0].classList.add('swiper-slide-thumb-active');
+
+        var galleryTop2 = new Swiper('.swiper1', {
+            spaceBetween: 10,
+        });
+
+        function updateActiveThumbnail2(index) {            
+            galleryThumbs2.slides.forEach(function(slide) {
+                slide.classList.remove('swiper-slide-thumb-active');
+            });
+            if (galleryThumbs2.slides[index]) {
+                galleryThumbs2.slides[index].classList.add('swiper-slide-thumb-active');
+            }
+        }
+
+        function getActiveSlideIndexFromData2() {
+            var activeSlide = document.querySelector('.swiper1 .swiper-slide-active');
+            if (activeSlide) {
+                var index = parseInt(activeSlide.getAttribute('data-swiper-slide-index'), 10);
+                return index;
+            }
+            return null;
+        }
+
+        // MutationObserver for the second Swiper instance
+        var observer2 = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.classList.contains('swiper-slide-active')) {
+                    var activeIndex = getActiveSlideIndexFromData2();
+                    if (activeIndex !== null) {
+                        updateActiveThumbnail2(activeIndex);
+                    }
+                }
+            });
+        });
+
+        // Observe the swiper-wrapper for the second Swiper instance
+        var targetNode2 = document.querySelector('.swiper1 .swiper-wrapper');
+        if (targetNode2) {
+            observer2.observe(targetNode2, {
+                attributes: true, // Listen for attribute changes
+                subtree: true,    // Observe all descendants, not just the direct child
+                attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+            });
+        }
+
+        // Handle click events on thumbnails for the second Swiper instance
+        galleryThumbs2.on('click', function(swiper) {
+            if (!swiper.clickedSlide) {
+                return;
+            }
+            var clickedSlide = swiper.clickedSlide;
+            var clickedIndex = Array.prototype.indexOf.call(swiper.slides, clickedSlide);
+
+            if (clickedIndex !== null && clickedIndex !== undefined) {
+                clickedIndex = parseInt(clickedIndex, 10);
+
+                // Trigger the corresponding pagination bullet
+                var paginationBullets = document.querySelectorAll('.swiper-pagination1 .swiper-pagination-bullet');
+                if (paginationBullets[clickedIndex]) {
+                    paginationBullets[clickedIndex].click();
+                }
+            }
+        });
+
+        if (window === window.parent) {
+            window.location.href = "../../?project=" + window.location.pathname;
+        }
+
+    </script>
+</body>
+
+</html>
