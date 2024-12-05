@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>5-bar planar parallel robot for sorting chocolates</title>
+    <title>Autonomous warehouse mobile robot</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -350,6 +350,8 @@
                 max-width: 100%;
             }
         }
+
+        
     </style>
 </head>
 
@@ -429,6 +431,8 @@
                         </div>
                     </div>
 
+                    <!-- Start of Copy -->
+
                     <div class="col-lg-4">
                         <div class="portfolio-info">
                             <h3>Project information</h3>
@@ -436,7 +440,7 @@
                                 <li><strong>Category</strong>: Robotics Project</li>
                                 <li><strong>Client</strong>: Mansoura University Graduation Project</li>
                                 <li><strong>Project due date</strong>: 24 June, 2024</li>
-                                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                                <li><strong>Project URL</strong>: <a href="#This is auto set" id="project-url">Click Here</a></li>
                             </ul>
                         </div>
                         <div id="model-preview-container" style="position: relative; text-align: center; margin-top: 20px;">
@@ -509,6 +513,9 @@
 
 
                 </div>
+
+                <!-- END of Copy model -->
+
                 <video  autoplay loop muted controls style="height: 500px;">
                     <source src="../../assets/projects/Autonomous warehouse mobile robot/Video 00.mp4" type="video/mp4">
                     Your browser does not support the video tag.
@@ -585,6 +592,15 @@
     <!-- Redirect to main page if loaded directly -->
     <script>
      
+        // Get the current page URL
+        const currentUrl = window.location.href;
+
+        // Select the anchor tag
+        const projectUrlElement = document.getElementById('project-url');
+
+        // Set the href and text content dynamically
+        projectUrlElement.href = currentUrl;
+
 
         document.getElementById('copyLinkButton').addEventListener('click', function(event) {
             event.preventDefault();
