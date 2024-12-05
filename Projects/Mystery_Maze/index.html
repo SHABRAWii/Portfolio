@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Mystery Maze</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="../../assets/img/favicon.png" rel="icon">
+    <link href="../../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="../../assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="../../assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="../../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="../../assets/css/style.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        
+        .portfolio-details-slider {
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            transform: translateX(-50px);
+        }
+        
+        .swiper-container {
+            overflow: visible;
+        }
+        
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 350px;
+        }
+        
+        .swiper-slide img,
+        .swiper-slide video {
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 350px;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .swiper-slide img:hover,
+        .swiper-slide video:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .swiper-pagination-bullet {
+            background: #007bff;
+            opacity: 1;
+        }
+        
+        .swiper-pagination-bullet-active {
+            background: #0056b3;
+        }
+        
+        .copy-link-button {
+            display: flex;
+            align-items: center;
+            color: blue;
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            position: absolute;
+            /* Positioning the button */
+            top: 10px;
+            /* Adjust the top position as needed */
+            right: 10px;
+            /* Adjust the right position as needed */
+            background-color: white;
+            /* Background color for contrast */
+            padding: 5px 10px;
+            /* Padding for better click area */
+            border-radius: 5px;
+            /* Rounded corners */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for depth */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            /* Smooth transition for hover effects */
+        }
+        
+        .copy-link-button img {
+            margin-left: 5px;
+            width: 18px;
+            /* Adjust the size of the icon as needed */
+            height: 18px;
+        }
+        
+        .copy-link-button:hover {
+            transform: scale(1.05);
+            /* Slightly enlarge on hover */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            /* Darker shadow on hover */
+            color: blue;
+            /* Ensure color doesn't change on hover */
+            text-decoration: none;
+            /* Ensure no underline on hover */
+        }
+        /* Portfolio details styles */
+        
+        .portfolio-details {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .portfolio-details h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .portfolio-details p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .portfolio-details h3 {
+            color: #007bff;
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .swiper-container.gallery-thumbs1  {
+            margin-top: 25px;
+            height: 100px; /* Smaller height for thumbnails */
+            box-sizing: border-box;
+            margin-bottom: 10px; /* Space between thumbnails and pagination */
+        }
+
+        .swiper-container.gallery-thumbs1 .swiper-slide {
+            width: 60px; /* Smaller width for each thumbnail */
+            height: 100%; /* Keep height proportional */
+            opacity: 0.4; /* Dim inactive thumbnails */
+            transition: opacity 0.3s;
+            cursor: pointer; /* Add pointer cursor for clickability */
+        }
+
+        .swiper-container.gallery-thumbs1 .swiper-slide-thumb-active {
+            opacity: 1; /* Highlight active thumbnail */
+        }
+        .swiper-container.gallery-thumbs  {
+            margin-top: 25px;
+            height: 80px; /* Smaller height for thumbnails */
+            box-sizing: border-box;
+            margin-bottom: 10px; /* Space between thumbnails and pagination */
+        }
+
+        .swiper-container.gallery-thumbs .swiper-slide {
+            width: 60px; /* Smaller width for each thumbnail */
+            height: 100%; /* Keep height proportional */
+            opacity: 0.4; /* Dim inactive thumbnails */
+            transition: opacity 0.3s;
+            cursor: pointer; /* Add pointer cursor for clickability */
+        }
+
+        .swiper-container.gallery-thumbs .swiper-slide-thumb-active {
+            opacity: 1; /* Highlight active thumbnail */
+        }
+
+        /* Main Swiper */
+        .portfolio-details-slider {
+            width: 100%; /* Full width */
+            height: auto; /* Adjust height based on content */
+        }
+
+        .swiper-pagination {
+            margin-top: 10px; /* Add margin to create space between thumbnails and pagination */
+        }
+        /* Normal state for h6 and a */
+        .roles h6 a {
+            color: #287ad1 !important; /* Inherit color from the parent, typically the default link color */
+            text-decoration: none; /* No underline by default */
+            transition: color 0.2s, font-weight 0.2s; /* Smooth transition for color and font weight */
+        }
+
+        /* Hover state for h6 and a */
+        .roles h6 a:hover {
+            color: #06386e; /* Color on hover */
+            font-weight: bold; /* Bold text on hover */
+        }
+
+        /* Normal state for list items */
+        .roles li a {
+            color: black !important; /* Default color for list items */
+            transition: color 0.2s, font-weight 0.2s; /* Smooth transition for color and font weight */
+        }
+
+        /* Hover state for list items */
+        .roles li a:hover {
+            color: #06386e !important;; /* Original color on hover */
+            font-weight: bold; /* Bold text on hover */
+        }
+        /* Add this to your CSS to ensure the container clears the floated element */
+        .clearfix::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        /* Apply clearfix to the parent container of the paragraph and image */
+        .parent-container {
+            position: relative;
+            padding: 10px;
+        }
+
+        .parent-container p {
+            text-align: justify;
+        }
+
+        .parent-container img {
+            float: right;
+            max-width: 400px;
+            margin-left: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        /* Fix for when the hash link is clicked */
+        .parent-container:target {
+            padding-left: 20px; /* Adjust this padding as needed */
+        }
+        .parent-container h5{
+            color:#08590a !important;
+        }
+        
+        /* Button and iframe container styling */
+        /* Adjust iframe container to take the full viewport */
+        #modelFrameContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Ensure iframe takes the full container space */
+        #modelFrame {
+            width: 100%;
+            height: 100%;
+        }
+
+
+        #render3DButton {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: right;
+            justify-content: right;
+        }
+
+        #render3DButton i {
+            margin-right: 8px;
+        }
+
+        #closeButton {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background-color: transparent;
+            border: none;
+            font-size: 24px;
+            color: rgb(0, 0, 0)  !important;
+            cursor: pointer;
+        }
+        .text-video-container {
+            display: flex;
+            flex-wrap: nowrap; /* Prevents wrapping of elements */
+            align-items: flex-start; /* Aligns items at the start */
+            justify-content: space-between; /* Ensures space is properly distributed */
+        }
+
+        .text-content {
+            flex: 2; /* Allocate larger portion to the text */
+            max-width: 800px; /* Prevents the text from taking excessive width */
+            margin-left: -100px;
+        }
+
+        .col_2_thumb {
+            flex: 1; /* Slider occupies the remaining space */
+            max-width: 600px; /* Limits the slider's width */
+            margin-left: auto; /* Pushes the slider to the right */
+            margin-right: -100px;
+            /* overflow: hidden; Ensures no overflow from the div */
+        }
+
+
+
+        
+
+       
+
+        .github i {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main id="main">
+
+        <!-- ======= Breadcrumbs ======= -->
+        <a href="#" class="copy-link-button" id="copyLinkButton">
+          Copy Link &nbsp;
+            <img src="..\..\assets\img\copy_link.png" alt="Copy Link" style="width: 15px;">
+        </a>
+
+
+
+        <!-- ======= Portfolio Details Section ======= -->
+        <section id="portfolio-details" class="portfolio-details">
+            <div class="container">
+
+                <div class="row gy-4">
+
+                    <div class="col-lg-8">
+                        <div class="portfolio-details-slider swiper swiper1">
+                            <div class="swiper-wrapper align-items-center">
+
+                                    <div class="swiper-slide">
+                                    <img src="../../assets/projects/Mystery Maze/Optimal_Path.gif" alt="">
+                                </div>
+                                <div
+                                    class="swiper-slide">
+                                    <img src="../../assets/projects/Mystery Maze/A_Star.gif" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Mystery Maze/BFS.gif" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Mystery Maze/DFS.gif" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Mystery Maze/Dijkstra.gif" alt="">
+                                </div>
+
+                                <div class="swiper-slide">
+                                    <img src="../../assets/projects/Mystery Maze/Maze.png" alt="">
+                                </div>
+
+                            </div>
+                            <!-- Thumbnails (preview) -->
+                            <div class="swiper-container gallery-thumbs gallery-thumbs1">
+                                <div class="swiper-wrapper">
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/Optimal_Path.gif" alt="">
+                                    </div>
+                                    
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/A_Star.gif" alt="">
+                                    </div>
+                                    
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/BFS.gif" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/DFS.gif" alt="">
+                                    </div>
+
+                                <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/Dijkstra.gif">
+                                    </div>
+
+                                <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/Maze.png" alt="">
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="swiper-pagination swiper-pagination1"></div>
+                        </div>
+                    </div>
+                
+
+                    <div class="col-lg-4">
+                        <div class="portfolio-info">
+                            <h3>Project Information</h3>
+                            <ul>
+                                <li><strong>Category:</strong> Algorithm Visualization</li>
+                                <li><strong>Language:</strong> Python</li>
+                                <li><strong>Framework:</strong> Tkinter</li>
+                                <li><strong>Algorithms Implemented:</strong> A*, BFS, DFS, Dijkstra</li>
+                                <li><strong>Repository:</strong> <a href="https://github.com/SHABRAWii/Mystery-Maze" target="_blank"><i class="bx bxl-github" style="font-size: 1.5em; margin-right: 5px;"></i>GitHub Repository</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="text-video-container">
+                        <div class="portfolio-details text-content">
+                            <h2>Mystery Maze: Algorithm Visualization Tool</h2>
+                            <p>
+                                The "Mystery Maze" project is an interactive application developed in Python using the Tkinter library. It visualizes and compares various pathfinding algorithms, including A*, Breadth-First Search (BFS), Depth-First Search (DFS), and Dijkstra's Algorithm, by solving randomly generated mazes.
+                            </p>
+
+                            <p><strong>Personal Contribution:</strong> I was responsible for almost 90% of the work on this project, including algorithm implementation, GUI design, and performance analysis. My role was critical in ensuring the project's success and functionality.</p>
+
+                            <h3>Features</h3>
+                            <ul>
+                                <li>Visualization of maze-solving processes for A*, BFS, DFS, and Dijkstra's Algorithm.</li>
+                                <li>Interactive GUI allowing users to select algorithms and generate new mazes.</li>
+                                <li>Statistical analysis of algorithm performance, including steps taken and accuracy.</li>
+                            </ul>
+
+                            <h3>Graphical User Interface (GUI)</h3>
+                            <p>
+                                The application features a user-friendly interface with two main windows:
+                            </p>
+                            <ul>
+                                <li><strong>Initial Window:</strong> Offers options to start the maze-solving process or exit the application.</li>
+                                <li><strong>Main Window:</strong> Provides functionalities to generate new mazes, select different algorithms, view statistics, and exit.</li>
+                            </ul>
+
+                            <h3>Algorithm Implementations</h3>
+                            <p>
+                                Each algorithm is implemented to solve the maze efficiently:
+                            </p>
+                            <ul>
+                                <li><strong>A* Algorithm:</strong> Utilizes heuristics to find the shortest path efficiently.</li>
+                                <li><strong>Breadth-First Search (BFS):</strong> Explores all possible paths level by level to find the shortest path in unweighted graphs.</li>
+                                <li><strong>Depth-First Search (DFS):</strong> Explores as far as possible along each branch before backtracking, which may not yield the shortest path.</li>
+                                <li><strong>Dijkstra's Algorithm:</strong> Computes the shortest path in graphs with non-negative weights.</li>
+                            </ul>
+
+                            <h3>Performance Analysis</h3>
+                            <p>
+                                The application evaluates each algorithm's performance by measuring the number of steps taken and calculating accuracy based on the optimal solution. Results are displayed in a tabular format for easy comparison.
+                            </p>
+
+                            <h3>Running the Project</h3>
+                            <p>
+                                To run the project:
+                            </p>
+                            <ol>
+                                <li>Install the required dependencies: Pillow, Tkinter, and CustomTkinter.</li>
+                                <li>Navigate to the project directory.</li>
+                                <li>Execute the main script: <code>python src/main.py</code></li>
+                            </ol>
+
+                            <h3>Statistics</h3>
+                            <p>
+                                The application provides detailed statistics, including:
+                            </p>
+                            <ul>
+                                <li>Optimal steps for each maze.</li>
+                                <li>Steps taken by each algorithm.</li>
+                                <li>Accuracy percentages comparing each algorithm's performance to the optimal solution.</li>
+                            </ul>
+                        </div>
+                        <div class="col_2_thumb">
+                            <div class="portfolio-details-slider swiper swiper2">
+                                <div class="swiper-wrapper align-items-center">
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/00.png" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/01.png" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/02.png" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/03.png" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/04.png" alt="">
+                                    </div>
+
+                                    <div class="swiper-slide">
+                                        <img src="../../assets/projects/Mystery Maze/05.png" alt="">
+                                    </div>
+
+                                </div>
+                                <!-- Thumbnails (preview) -->
+                                <div class="swiper-container gallery-thumbs gallery-thumbs2">
+                                    <div class="swiper-wrapper">
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/00.png" alt="">
+                                        </div>
+                                        
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/01.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/02.png" alt="">
+                                        </div>
+
+                                    <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/03.png" alt="">
+                                        </div>
+
+                                    <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/04.png" alt="">
+                                        </div>
+
+                                    <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/05.png" alt="">
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="swiper-pagination swiper-pagination2"></div>
+                                <div class="portfolio-details-slider swiper swiper3">
+                                    <div class="swiper-wrapper align-items-center">
+
+                                        
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_Optimal_Steps.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_Astar_Accuracy.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_Astar_Steps.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_BFS_Accuracy.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_BFS_Steps.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_DFS_Accuracy.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_DFS_Steps.png" alt="">
+                                        </div>
+
+                                        
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_Dijkstra_Accuracy.png" alt="">
+                                        </div>
+
+                                        <div class="swiper-slide">
+                                            <img src="../../assets/projects/Mystery Maze/Statics_Dijkstra_Steps.png" alt="">
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Thumbnails (preview) -->
+                                    <div class="swiper-container gallery-thumbs gallery-thumbs3">
+                                        <div class="swiper-wrapper">
+
+                                        
+                                        <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_Optimal_Steps.png" alt="">
+                                            </div>
+
+                                            <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_Astar_Accuracy.png" alt="">
+                                            </div>
+                                            
+                                            <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_Astar_Steps.png" alt="">
+                                            </div>
+
+                                            <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_BFS_Accuracy.png" alt="">
+                                            </div>
+
+                                        <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_BFS_Steps.png" alt="">
+                                            </div>
+
+                                        <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_DFS_Accuracy.png" alt="">
+                                            </div>
+
+                                        <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_DFS_Steps.png" alt="">
+                                            </div>
+
+                                        
+                                        <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_Dijkstra_Accuracy.png" alt="">
+                                            </div>
+
+                                        <div class="swiper-slide">
+                                                <img src="../../assets/projects/Mystery Maze/Statics_Dijkstra_Steps.png" alt="">
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="swiper-pagination swiper-pagination3"></div>
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+
+
+                    
+                    
+
+
+            </div>
+            
+            <br><br>
+        </section>
+        <!-- End Portfolio Details Section -->
+
+    </main><!-- End #main -->
+
+    <div id="preloader"></div>
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="../../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../../assets/vendor/aos/aos.js"></script>
+    <script src="../../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="../../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../../assets/vendor/typed.js/typed.umd.js"></script>
+    <script src="../../assets/vendor/waypoints/noframework.waypoints.js"></script>
+    <script src="../../assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="../../assets/js/main.js"></script>
+    <!-- Redirect to main page if loaded directly -->
+    <!-- Redirect to main page if loaded directly -->
+    <script>
+
+        document.getElementById('copyLinkButton').addEventListener('click', function(event) {
+            event.preventDefault();
+            const projectLink = window.location.href; // Use the current URL as the project link
+            navigator.clipboard.writeText(projectLink).then(() => {
+                // alert('Link copied to clipboard');
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+
+
+        // document.getElementById('closeButton').addEventListener('click', function() {
+        //     document.getElementById('modelFrameContainer').style.display = 'none';
+        // });
+
+         // First Swiper instance (Original)
+        var galleryThumbs1 = new Swiper('.gallery-thumbs1', {
+            spaceBetween: 10,
+            slidesPerView: 6, // Adjust based on the number of thumbnails
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        // galleryThumbs1.slides[0].classList.add('swiper-slide-thumb-active');
+
+        var galleryTop1 = new Swiper('.portfolio-details-slider', {
+            spaceBetween: 10,
+        });
+
+        function updateActiveThumbnail1(index) {            
+            galleryThumbs1.slides.forEach(function(slide) {
+                slide.classList.remove('swiper-slide-thumb-active');
+            });
+            if (galleryThumbs1.slides[index]) {
+                galleryThumbs1.slides[index].classList.add('swiper-slide-thumb-active');
+            }
+        }
+
+        function getActiveSlideIndexFromData1() {
+            var activeSlide = document.querySelector('.portfolio-details-slider .swiper-slide-active');
+            if (activeSlide) {
+                var index = parseInt(activeSlide.getAttribute('data-swiper-slide-index'), 10);
+                return index;
+            }
+            return null;
+        }
+
+        // MutationObserver for the first Swiper instance
+        var observer1 = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.classList.contains('swiper-slide-active')) {
+                    var activeIndex = getActiveSlideIndexFromData1();
+                    if (activeIndex !== null) {
+                        updateActiveThumbnail1(activeIndex);
+                    }
+                }
+            });
+        });
+
+        // Observe the swiper-wrapper for the first Swiper instance
+        var targetNode1 = document.querySelector('.portfolio-details-slider .swiper-wrapper');
+        if (targetNode1) {
+            observer1.observe(targetNode1, {
+                attributes: true, // Listen for attribute changes
+                subtree: true,    // Observe all descendants, not just the direct child
+                attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+            });
+        }
+
+        // Handle click events on thumbnails for the first Swiper instance
+        galleryThumbs1.on('click', function(swiper) {
+            if (!swiper.clickedSlide) {
+                return;
+            }
+            var clickedSlide = swiper.clickedSlide;
+            var clickedIndex = Array.prototype.indexOf.call(swiper.slides, clickedSlide);
+
+            if (clickedIndex !== null && clickedIndex !== undefined) {
+                clickedIndex = parseInt(clickedIndex, 10);
+
+                // Trigger the corresponding pagination bullet
+                var paginationBullets = document.querySelectorAll('.swiper-pagination-bullet');
+                if (paginationBullets[clickedIndex]) {
+                    paginationBullets[clickedIndex].click();
+                }
+            }
+        });
+
+
+        // Second Swiper instance (Duplicate)
+        var galleryThumbs2 = new Swiper('.gallery-thumbs2', {
+            spaceBetween: 10,
+            slidesPerView: 4, // Adjust based on the number of thumbnails
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        // galleryThumbs2.slides[0].classList.add('swiper-slide-thumb-active');
+
+        var galleryTop2 = new Swiper('.swiper2', {
+            spaceBetween: 10,
+        });
+
+        function updateActiveThumbnail2(index) {            
+            galleryThumbs2.slides.forEach(function(slide) {
+                slide.classList.remove('swiper-slide-thumb-active');
+            });
+            if (galleryThumbs2.slides[index]) {
+                galleryThumbs2.slides[index].classList.add('swiper-slide-thumb-active');
+            }
+        }
+
+        function getActiveSlideIndexFromData2() {
+            var activeSlide = document.querySelector('.swiper2 .swiper-slide-active');
+            if (activeSlide) {
+                var index = parseInt(activeSlide.getAttribute('data-swiper-slide-index'), 10);
+                return index;
+            }
+            return null;
+        }
+
+        // MutationObserver for the second Swiper instance
+        var observer2 = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.classList.contains('swiper-slide-active')) {
+                    var activeIndex = getActiveSlideIndexFromData2();
+                    if (activeIndex !== null) {
+                        updateActiveThumbnail2(activeIndex);
+                    }
+                }
+            });
+        });
+
+        // Observe the swiper-wrapper for the second Swiper instance
+        var targetNode2 = document.querySelector('.swiper2 .swiper-wrapper');
+        if (targetNode2) {
+            observer2.observe(targetNode2, {
+                attributes: true, // Listen for attribute changes
+                subtree: true,    // Observe all descendants, not just the direct child
+                attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+            });
+        }
+
+        // Handle click events on thumbnails for the second Swiper instance
+        galleryThumbs2.on('click', function(swiper) {
+            if (!swiper.clickedSlide) {
+                return;
+            }
+            var clickedSlide = swiper.clickedSlide;
+            var clickedIndex = Array.prototype.indexOf.call(swiper.slides, clickedSlide);
+
+            if (clickedIndex !== null && clickedIndex !== undefined) {
+                clickedIndex = parseInt(clickedIndex, 10);
+
+                // Trigger the corresponding pagination bullet
+                var paginationBullets = document.querySelectorAll('.swiper-pagination2 .swiper-pagination-bullet');
+                if (paginationBullets[clickedIndex]) {
+                    paginationBullets[clickedIndex].click();
+                }
+            }
+        });
+
+        // Second Swiper instance (Duplicate)
+        var galleryThumbs3 = new Swiper('.gallery-thumbs3', {
+            spaceBetween: 10,
+            slidesPerView: 4, // Adjust based on the number of thumbnails
+            freeMode: true,
+            watchSlidesVisibility: true,
+            watchSlidesProgress: true,
+        });
+        // galleryThumbs2.slides[0].classList.add('swiper-slide-thumb-active');
+
+        var galleryTop3 = new Swiper('.swiper3', {
+            spaceBetween: 10,
+        });
+
+        function updateActiveThumbnail3(index) {            
+            galleryThumbs3.slides.forEach(function(slide) {
+                slide.classList.remove('swiper-slide-thumb-active');
+            });
+            if (galleryThumbs3.slides[index]) {
+                galleryThumbs3.slides[index].classList.add('swiper-slide-thumb-active');
+            }
+        }
+
+        function getActiveSlideIndexFromData3() {
+            var activeSlide = document.querySelector('.swiper3 .swiper-slide-active');
+            if (activeSlide) {
+                var index = parseInt(activeSlide.getAttribute('data-swiper-slide-index'), 10);
+                return index;
+            }
+            return null;
+        }
+
+        // MutationObserver for the second Swiper instance
+        var observer3 = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.target.classList.contains('swiper-slide-active')) {
+                    var activeIndex = getActiveSlideIndexFromData3();
+                    if (activeIndex !== null) {
+                        updateActiveThumbnail3(activeIndex);
+                    }
+                }
+            });
+        });
+
+        // Observe the swiper-wrapper for the second Swiper instance
+        var targetNode3 = document.querySelector('.swiper3 .swiper-wrapper');
+        if (targetNode3) {
+            observer3.observe(targetNode3, {
+                attributes: true, // Listen for attribute changes
+                subtree: true,    // Observe all descendants, not just the direct child
+                attributeFilter: ['class'] // Only observe changes to the 'class' attribute
+            });
+        }
+
+        // Handle click events on thumbnails for the second Swiper instance
+        galleryThumbs3.on('click', function(swiper) {
+            if (!swiper.clickedSlide) {
+                return;
+            }
+            var clickedSlide = swiper.clickedSlide;
+            var clickedIndex = Array.prototype.indexOf.call(swiper.slides, clickedSlide);
+
+            if (clickedIndex !== null && clickedIndex !== undefined) {
+                clickedIndex = parseInt(clickedIndex, 10);
+
+                // Trigger the corresponding pagination bullet
+                var paginationBullets = document.querySelectorAll('.swiper-pagination3 .swiper-pagination-bullet');
+                if (paginationBullets[clickedIndex]) {
+                    paginationBullets[clickedIndex].click();
+                }
+            }
+        });
+
+        galleryThumbs1.slides[0].classList.add('swiper-slide-thumb-active');
+        galleryThumbs2.slides[0].classList.add('swiper-slide-thumb-active');
+        galleryThumbs3.slides[0].classList.add('swiper-slide-thumb-active');
+
+        if (window === window.parent) {
+            window.location.href = "../../?project=" + window.location.pathname;
+        }
+
+    </script>
+</body>
+
+</html>
