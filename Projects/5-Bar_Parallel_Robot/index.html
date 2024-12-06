@@ -428,6 +428,15 @@
                                 <li><strong>Application:</strong> Pick-and-Place Operations</li>
                             </ul>
                         </div>
+                        <div id="model-preview-container" style="position: relative; text-align: center; margin-top: 20px;">
+                            <!-- Button for V2.0 -->
+                            <button id="render3DButton" style="padding: 15px 25px; background: linear-gradient(135deg, #6e8efb, #a777e3); color: white; border: none; border-radius: 12px; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); transition: background 0.3s, transform 0.2s, box-shadow 0.3s;">
+                                <img src="..\..\assets\img\3d_render.png" alt="3D Model V2.0" style="width: 55px; height: auto; margin-right: 12px;">
+                                <span style="display: flex; align-items: center;">
+                                    <i class="fas fa-cube" style="margin-right: 8px; font-size: 20px;"></i> Render Model
+                                </span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="text-video-container">
@@ -811,6 +820,37 @@
         galleryThumbs1.slides[0].classList.add('swiper-slide-thumb-active');
         galleryThumbs2.slides[0].classList.add('swiper-slide-thumb-active');
         // galleryThumbs3.slides[0].classList.add('swiper-slide-thumb-active');
+        
+        document.getElementById('render3DButton').addEventListener('click', function () {
+            createModelViewer('preview_model.html');
+        });
+        // Function to create the model viewer
+        function createModelViewer(modelUrl) {
+            const mainContent = document.getElementById('main');
+            const modelFrameContainer = document.createElement('div');
+            modelFrameContainer.id = 'modelFrameContainer';
+            modelFrameContainer.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); z-index: 1000; display: flex; justify-content: center; align-items: center;';
+
+            const closeButton = document.createElement('button');
+            closeButton.id = 'closeButton';
+            closeButton.style.cssText = 'position: absolute; top: 10px; right: 20px; background-color: transparent; border: none; font-size: 24px; color: white; cursor: pointer;';
+            closeButton.innerHTML = '&times;';
+            closeButton.addEventListener('click', function () {
+                document.body.removeChild(modelFrameContainer);
+                mainContent.style.display = 'block'; // Show main content again
+            });
+
+            const iframe = document.createElement('iframe');
+            iframe.id = 'modelFrame';
+            iframe.src = modelUrl;
+            iframe.style.cssText = 'width: 100%; height: 100%; border: none;';
+
+            modelFrameContainer.appendChild(closeButton);
+            modelFrameContainer.appendChild(iframe);
+            document.body.appendChild(modelFrameContainer);
+
+            mainContent.style.display = 'none'; // Hide main content
+        }
 
         if (window === window.parent) {
             window.location.href = "../../?project=" + window.location.pathname;
